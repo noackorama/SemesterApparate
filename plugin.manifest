@@ -5,4 +5,4 @@ origin=data-quest
 version=0.5
 dbscheme=install.sql
 uninstalldbscheme=uninstall.sql
-studipMinVersion=2.4
+studipMinVersion=2.3

@@ -52,7 +52,8 @@ class ESemesterApparatePlugin extends AbstractStudIPSystemPlugin {
 		$link['type'] = $type;
 		$link['file_id'] = $file_id;
 		$link['file_name'] = $file_name;
-		return UrlHelper::getScriptLink($base , $link);
+		$link['cid'] = null;
+		return UrlHelper::getLink($base , $link);
 	}
 
 	/**
@@ -60,7 +61,6 @@ class ESemesterApparatePlugin extends AbstractStudIPSystemPlugin {
 	 */
 	function __construct(){
 		parent::__construct();
-        //$this->setPluginIconName("images/literature-white.png");
 		$this->access_granted = $GLOBALS['perm']->have_perm('root') || RolePersistence::isAssignedRole($GLOBALS['user']->id, 'Literaturadmin');
 		$this->template_factory = new Flexi_TemplateFactory(dirname(__FILE__).'/templates/');
 
@@ -68,7 +68,6 @@ class ESemesterApparatePlugin extends AbstractStudIPSystemPlugin {
 			$navigation = new PluginNavigation();
 			$navigation->setDisplayname(_("Semesterapparate"));
 			$navigation->addLinkParam('action', 'main');
-            //$navigation->setActiveImage(Assets::image_path('/images/icons/16/black/literature.png'));
 			$config_nav0 = clone $navigation;
 			$navigation->addSubmenu($config_nav0);
 			$config_nav1 = new PluginNavigation();
@@ -586,7 +585,7 @@ class ESemesterApparatePlugin extends AbstractStudIPSystemPlugin {
 						$edit='';
 						if (($change != $db3->f("dokument_id")) && ($upload != $db3->f("dokument_id")) && $filelink != $db3->f("dokument_id")) {
 							$type = ($db3->f('url') != '')? 6 : 0;
-							$edit= '&nbsp;' . Studip\LinkButton::create(_("Herunterladen"), ESemesterApparatePlugin::GetDownloadLink( $db3->f('dokument_id'), $db3->f('filename'), $type, 'force'));
+							$edit= '&nbsp;' . Studip\LinkButton::create(_("Herunterladen"), decodeHTML(ESemesterApparatePlugin::GetDownloadLink( $db3->f('dokument_id'), $db3->f('filename'), $type, 'force')));
 							$fext = getFileExtension(strtolower($db3->f('filename')));
 								if ($type!=6)
 									$edit.= "&nbsp;&nbsp;&nbsp;" . Studip\LinkButton::create(_("Bearbeiten"), "$base_uri&open=".$db3->f("dokument_id")."_c_#anker");

@@ -2,8 +2,8 @@
 // +---------------------------------------------------------------------------+
 // ESAVeranstaltungsPlugin.class.php
 // Stud.IP standard plugin class for viewing esa lit lists in courses
-// 
-// Copyright (c) 2007 André Noack <noack@data-quest.de> 
+//
+// Copyright (c) 2007 André Noack <noack@data-quest.de>
 // Suchi & Berg GmbH <info@data-quest.de>
 // +---------------------------------------------------------------------------+
 // This program is free software; you can redistribute it and/or
@@ -25,7 +25,7 @@ require_once "ESemesterApparatePlugin.class.php";
 /**
 * plugin class for viewing esa lit lists in courses
 *
-* 
+*
 *
 * @access	public
 * @author	André Noack <noack@data-quest.de>
@@ -33,11 +33,11 @@ require_once "ESemesterApparatePlugin.class.php";
 * @package	esesemesterapparate
 */
 class ESAVeranstaltungsPlugin extends AbstractStudIPStandardPlugin {
-	
+
 	var $template_factory;
 
 	/**
-	 * 
+	 *
 	 */
 	function ESAVeranstaltungsPlugin(){
 		AbstractStudIPStandardPlugin::AbstractStudIPStandardPlugin();
@@ -52,14 +52,14 @@ class ESAVeranstaltungsPlugin extends AbstractStudIPStandardPlugin {
 		$this->setNavigation($navigation);
 
         $this->setPluginIconName("images/literature-white.png");
-        //$navigation->setImage(Assets::image_path('/images/icons/16/white/literature.png'));
+        $navigation->setImage(Assets::image_path('/images/icons/16/white/literature.png'));
         $navigation->setActiveImage(Assets::image_path('/images/icons/16/black/literature.png'));
 	}
-	
+
 	function initialize(){
 		$GLOBALS['HELP_KEYWORD'] = 'Plugins.EsaPluginVeranstaltung';
 	}
-	
+
 	function actionShow(){
 		$tree =& TreeAbstract::GetInstance("ESALitList", $this->seminar_id);
 		if($tree->checkDynamicListUpdate())	$tree->init();
