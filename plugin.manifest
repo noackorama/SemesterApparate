@@ -1,0 +1,8 @@
+pluginname=Elektronischer Semester Apparat
+pluginclassname=ESemesterApparatePlugin
+pluginclassname=ESAVeranstaltungsPlugin
+origin=data-quest
+version=0.5
+dbscheme=install.sql
+uninstalldbscheme=uninstall.sql
+studipMinVersion=2.4
